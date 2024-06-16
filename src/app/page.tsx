@@ -8,12 +8,12 @@ export default function Home() {
     <>
       <ParticlesComponent id="particles" />
       <Header />
-      <section className="flex flex-col gap-6 items-center justify-center mt-36 px-4 md:px-6 lg:px-8">
+      <section className="flex flex-col gap-6 items-center justify-center mt-52 px-4 md:px-6 lg:px-8">
         <div className="flex md:flex-row gap-4 items-center">
           <Image
             src={laughEmoji}
             alt="laugh emoji"
-            className="h-12 w-12 md:h-16 md:w-16"
+            className="h-12 w-12 md:h-16 md:w-16 animate-tada"
           ></Image>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl text-center">
             Simple Smile
@@ -32,11 +32,9 @@ export default function Home() {
             more today!
           </p>
         </div>
-        <div className="flex flex-col md:flex-row gap-4 items-center">
-          <Button className="w-full md:w-auto">Get Started</Button>
-          <Button variant="secondary" className="w-full md:w-auto">
-            Learn More
-          </Button>
+        <div className="flex flex-row gap-4 items-center">
+          <Button>Get Started</Button>
+          <Button variant="secondary">Learn More</Button>
         </div>
       </section>
     </>
