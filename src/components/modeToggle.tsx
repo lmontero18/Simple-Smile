@@ -14,6 +14,7 @@ import {
 
 export function ModeToggle() {
   const { setTheme } = useTheme();
+  //const {newThemes} = useHook();
 
   return (
     <DropdownMenu>
@@ -30,9 +31,6 @@ export function ModeToggle() {
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")}>
           Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

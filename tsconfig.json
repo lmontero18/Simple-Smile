@@ -26,7 +26,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/components/particles.js",
+    "src/components/particles.ts",
     "tailwind.config.js",
     "tailwind.config.js"
   ],

@@ -3,7 +3,10 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import laughEmoji from "../../public/laughEmoji.png";
 import ParticlesComponent from "@/components/particles";
+import Link from "next/link";
 export default function Home() {
+  const GITHUB_URL = "https://github.com/lmontero18/Simple-Smile";
+
   return (
     <>
       <ParticlesComponent id="particles" />
@@ -13,7 +16,7 @@ export default function Home() {
           <Image
             src={laughEmoji}
             alt="laugh emoji"
-            className="h-12 w-12 md:h-16 md:w-16 animate-tada"
+            className="h-12 w-12 md:h-16 md:w-16"
           ></Image>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold drop-shadow-2xl text-center">
             Simple Smile
@@ -33,8 +36,12 @@ export default function Home() {
           </p>
         </div>
         <div className="flex flex-row gap-4 items-center">
-          <Button>Get Started</Button>
-          <Button variant="secondary">Learn More</Button>
+          <Button>
+            <Link href="/get-started">Get Started</Link>
+          </Button>
+          <Button variant="secondary">
+            <Link href={GITHUB_URL}>Learn More</Link>
+          </Button>
         </div>
       </section>
     </>
