@@ -37,7 +37,7 @@ export default function Home() {
         </div>
         <div className="flex flex-row gap-4 items-center">
           <Button>
-            <Link href="/get-started">Get Started</Link>
+            <Link href="/generate-joke">Generate a Joke</Link>
           </Button>
           <Button variant="secondary">
             <Link href={GITHUB_URL}>Learn More</Link>
