@@ -30,9 +30,9 @@ export default function Home() {
         <div className="w-full md:w-2/3 lg:w-1/2 text-center mx-auto">
           <p className="text-sm md:text-base lg:text-lg text-muted-foreground">
             Brighten your day with a laugh! Simple Smile App brings you a daily
-            stream of jokes and uplifting quotes directly via a powerful joke
-            API. Quick smiles and shared joy are just a tap away. Start smiling
-            more today!
+            stream of jokes and uplifting quotes directly via a powerful
+            JokeAPI. Quick smiles and shared joy are just a tap away. Start
+            smiling more today!
           </p>
         </div>
         <div className="flex flex-row gap-4 items-center">
@@ -44,6 +44,9 @@ export default function Home() {
           </Button>
         </div>
       </section>
+      <footer className="flex items-center justify-center mt-96">
+        <span className="text-muted-foreground">©2024 All rights reserved</span>
+      </footer>
     </>
   );
 }
