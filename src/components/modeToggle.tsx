@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import { useEffect, useState } from "react";
 import { Moon, Sun, MountainSnow, Ship, Bolt } from "lucide-react";
