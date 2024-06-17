@@ -20,23 +20,27 @@ import {
 import React, { useEffect, useState } from "react";
 
 function JokesPage() {
-  // const [joke, setJoke] = useState();
+  const [joke, setJoke] = useState<string | null>(null);
+  const [category, setCategory] = useState("Any");
+  const [language, setLanguage] = useState("en");
+  const [type, setType] = useState("single");
 
-  // useEffect(() => {
-  //   fetch("https://v2.jokeapi.dev/joke/Dark")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       if (!data.error) {
-  //         const fetchedJoke = data.setup
-  //           ? `${data.setup} - ${data.delivery}`
-  //           : data.joke;
-  //         setJoke(fetchedJoke);
-  //       } else {
-  //         console.error("Failed to fetch Joke:", data.message);
-  //       }
-  //     });
-  // }, []);
-
+  const handleFetchJoke = () => {
+    fetch(
+      `https://v2.jokeapi.dev/joke/${category}?lang=${language}&type=${type}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        if (!data.error) {
+          const fetchedJoke = data.setup
+            ? `${data.setup} - ${data.delivery}`
+            : data.joke;
+          setJoke(fetchedJoke);
+        } else {
+          console.error("Failed to fetch Joke:", data.message);
+        }
+      });
+  };
   return (
     <main>
       <ParticlesComponent id="particles" />
@@ -55,11 +59,12 @@ function JokesPage() {
               <label className="block text-sm font-medium text-gray-700">
                 Category
               </label>
-              <Select>
+              <Select onValueChange={setCategory}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select category" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="Any">Any</SelectItem>
                   <SelectItem value="Dark">Dark</SelectItem>
                   <SelectItem value="Programming">Programming</SelectItem>
                   <SelectItem value="Misc">Misc</SelectItem>
@@ -72,7 +77,7 @@ function JokesPage() {
               <label className="block text-sm font-medium text-gray-700">
                 Type
               </label>
-              <Select>
+              <Select onValueChange={setType}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select type" />
                 </SelectTrigger>
@@ -86,7 +91,7 @@ function JokesPage() {
               <label className="block text-sm font-medium text-gray-700">
                 Language
               </label>
-              <Select>
+              <Select onValueChange={setLanguage}>
                 <SelectTrigger>
                   <SelectValue placeholder="Select language" />
                 </SelectTrigger>
@@ -98,9 +103,11 @@ function JokesPage() {
                 </SelectContent>
               </Select>
             </div>
-            <Button>Generate Joke</Button>
+            <Button onClick={handleFetchJoke}>Generate Joke</Button>
           </CardContent>
-          <CardFooter></CardFooter>
+          <CardFooter>
+            {joke ? <p>{joke}</p> : <p>No joke fetched yet.</p>}
+          </CardFooter>
         </Card>
       </section>
     </main>
