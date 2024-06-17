@@ -1,7 +1,7 @@
 "use client";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { useEffect, useMemo, useState } from "react";
-import { loadSlim } from "@tsparticles/slim"; // Importa el paquete slim
+import { loadSlim } from "@tsparticles/slim";
 import { useTheme } from "next-themes";
 
 const ParticlesComponent = (props) => {
@@ -18,6 +18,23 @@ const ParticlesComponent = (props) => {
 
   const particlesLoaded = (container) => {
     console.log(container);
+  };
+
+  const getColorByTheme = (theme) => {
+    switch (theme) {
+      case "dark":
+        return "#FFFFFF";
+      case "tokyo":
+        return "#FF5733";
+      case "ocean":
+        return "#1E90FF";
+      case "light":
+        return "#000000";
+      case "system":
+        return "#FFFFFF";
+      default:
+        return "#000000";
+    }
   };
 
   const options = useMemo(
@@ -47,10 +64,10 @@ const ParticlesComponent = (props) => {
       },
       particles: {
         color: {
-          value: theme === "dark" ? "#FFFFFF" : "#000000",
+          value: getColorByTheme(theme),
         },
         links: {
-          color: theme === "dark" ? "#FFFFFF" : "#000000",
+          color: getColorByTheme(theme),
           distance: 150,
           enable: true,
           opacity: 0.3,
@@ -70,20 +87,15 @@ const ParticlesComponent = (props) => {
           density: {
             enable: true,
           },
-          value: 150,
+          value: 86,
         },
         opacity: {
           value: 0.5,
         },
         shape: {
-          type: "star", // Cambia este valor a "polygon" o "image" según sea necesario
+          type: "star",
           polygon: {
-            sides: 5, // Ajusta el número de lados para hexágonos o triángulos
-          },
-          image: {
-            src: "path/to/your/image.png", // Ruta a la imagen personalizada
-            width: 100,
-            height: 100,
+            sides: 5,
           },
         },
         size: {

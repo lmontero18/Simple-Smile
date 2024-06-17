@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Moon, Sun } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Moon, Sun, MountainSnow, Ship, Bolt } from "lucide-react";
 import { useTheme } from "next-themes";
-
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -12,26 +12,60 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
+type ThemeIcons = {
+  light: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  dark: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  tokyo: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  ocean: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  system: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+};
+
+const themeIcons: ThemeIcons = {
+  light: Sun,
+  dark: Moon,
+  tokyo: MountainSnow,
+  ocean: Ship,
+  system: Bolt,
+};
+
 export function ModeToggle() {
-  const { setTheme } = useTheme();
-  //const {newThemes} = useHook();
+  const { theme, setTheme, themes } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState<string | undefined>(theme);
+
+  useEffect(() => {
+    setMounted(true);
+    setCurrentTheme(theme);
+  }, [theme]);
+
+  const handleThemeChange = (newTheme: string) => {
+    setCurrentTheme(newTheme);
+    setTheme(newTheme);
+  };
+
+  if (!mounted) {
+    return null;
+  }
+
+  const IconComponent = theme ? themeIcons[theme as keyof ThemeIcons] : Sun;
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="outline" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+          <IconComponent className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-transform" />
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
+        {themes.map((theme) => (
+          <DropdownMenuItem
+            key={theme}
+            onClick={() => handleThemeChange(theme)}
+          >
+            {theme}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );
