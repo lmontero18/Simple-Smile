@@ -81,7 +81,6 @@ function JokesPage() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Any">Any</SelectItem>
-                    <SelectItem value="Dark">Dark</SelectItem>
                     <SelectItem value="Programming">Programming</SelectItem>
                     <SelectItem value="Misc">Misc</SelectItem>
                     <SelectItem value="Pun">Pun</SelectItem>
